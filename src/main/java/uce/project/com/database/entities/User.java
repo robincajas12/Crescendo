@@ -13,7 +13,7 @@ import uce.project.com.cat.anotations.ColumnInfo;
 @Entity("User")
 public class User {
     @ColumnInfo(name="id")
-    @PrimaryKey()
+    @PrimaryKey(autoIncrement = true)
     private Integer id;
     @ColumnInfo(name="name", params = "255")
     private String name;

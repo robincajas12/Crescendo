@@ -4,6 +4,7 @@ import uce.project.com.cat.SqlColumnInfo;
 import uce.project.com.cat.types.SqlTypes;
 import uce.project.com.cat.types.inter.IDataType;
 
+import java.sql.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -57,16 +58,31 @@ public interface TableActions {
             sqlCreate.append(" ");
             sqlCreate.append(String.format(cInfo.type().sqlType(), cInfo.params()));
             sqlCreate.append(cInfo.isPrimaryKey()? " PRIMARY KEY" : "");
-            sqlCreate.append(cInfo.autoIncrement()? " AUTO INCREMENT":"");
+            sqlCreate.append(cInfo.autoIncrement()? " AUTO_INCREMENT":"");
             sqlCreate.append(",");
         }
         sqlCreate = new StringBuilder(sqlCreate.substring(0, sqlCreate.length() - 1));
         sqlCreate.append("\n");
         sqlCreate.append(");");
-
+        System.out.println(sqlCreate);
         return sqlCreate.toString();
     }
-    boolean createTable(Class<?> entity);
-    boolean checkIfTableExist(String tableName);
-    boolean dropTableIfExist(String tableName);
+    public static boolean doesTableExist(Connection connection, String tableName) throws SQLException {
+        DatabaseMetaData dbMeta = connection.getMetaData();
+        try (ResultSet rs = dbMeta.getTables(null, null, tableName, new String[] {"TABLE"})) {
+            return rs.next();
+        }
+    }
+    static boolean dropTable(Connection connection, String tableName)
+    {
+        System.out.println(tableName);
+        String sql = "DROP TABLE IF EXISTS " + tableName;
+        try (Statement stmt = connection.createStatement()) {
+            stmt.executeUpdate(sql);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
