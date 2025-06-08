@@ -1,17 +1,14 @@
 package uce.project.com.cat.proxy.handlers;
 
 import uce.project.com.cat.Cat;
-import uce.project.com.cat.RoomDatabase;
 import uce.project.com.cat.anotations.ColumnInfo;
 import uce.project.com.cat.anotations.Query;
-import uce.project.com.main.User;
 
 import java.lang.reflect.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DaoHandler implements InvocationHandler {

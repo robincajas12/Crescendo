@@ -1,7 +1,8 @@
-package uce.project.com.main;
+package uce.project.com.database.daos;
 
 import uce.project.com.cat.anotations.Dao;
 import uce.project.com.cat.anotations.Query;
+import uce.project.com.database.entities.User;
 
 import java.util.List;
 

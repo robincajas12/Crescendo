@@ -1,9 +1,8 @@
-package uce.project;
+package uce.project.com;
 
-import uce.project.com.main.AppDataBase;
+import uce.project.com.database.AppDataBase;
 import uce.project.com.cat.Cat;
 import uce.project.com.cat.CreateTable;
-import uce.project.com.main.User;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;

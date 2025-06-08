@@ -3,11 +3,10 @@ package uce.project.com.cat;
 import uce.project.com.cat.anotations.Database;
 import uce.project.com.cat.anotations.TableActions;
 import uce.project.com.cat.proxy.handlers.AppDatabaseHandler;
-import uce.project.com.main.AppDataBase;
+import uce.project.com.database.AppDataBase;
 
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 

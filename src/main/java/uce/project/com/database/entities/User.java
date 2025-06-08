@@ -1,4 +1,4 @@
-package uce.project.com.main;
+package uce.project.com.database.entities;
 import lombok.*;
 import uce.project.com.cat.anotations.Entity;
 import uce.project.com.cat.anotations.PrimaryKey;
