@@ -5,6 +5,10 @@ plugins {
 group = "uce.project"
 version = "1.0-SNAPSHOT"
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 
 repositories {
@@ -20,6 +24,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     implementation("org.projectlombok:lombok:1.18.38")
     annotationProcessor ("org.projectlombok:lombok:1.18.38")
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
+    implementation("org.springframework.boot:spring-boot-starter-web:3.0.5")
 
 }
 

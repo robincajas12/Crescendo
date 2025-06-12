@@ -1,5 +1,8 @@
 package uce.project.com;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import uce.project.com.database.AppDataBase;
 import uce.project.com.cat.Cat;
 import uce.project.com.database.entities.Product;
@@ -14,11 +17,14 @@ import java.sql.SQLException;
  * Breve descripción de la clase.
  * Más detalles opcionales.
  */
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
-
+        new SpringApplicationBuilder(Main.class)
+                .properties("server.port = 3000")
+                .run(args);
         try
         {
             Cat.setConnection(DriverManager.getConnection("jdbc:mysql://localhost:3340/employees?user=root&password=root"));

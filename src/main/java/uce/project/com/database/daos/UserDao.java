@@ -9,13 +9,11 @@ import java.util.List;
 public interface UserDao{
     @Query("select * from User")
     public List<User> getAll();
-    @Query("select * from User where gender=true order by name")
-    public List<User> getGenderTrue();
+    @Query("select * from User where gender=:gender order by name")
+    public List<User> getGenderTrue(@P("gender") Boolean gender);
     @Query("select * from User where id = :id")
     public List<User> getById(@P("id") Integer id);
-    @Insert
-    public boolean insertUser(User user);
-    @Update
-    public boolean updateUser(User user);
-    @Delete boolean deleteUser(User user);
+    @Insert public boolean insertUser(User user);
+    @Update public boolean updateUser(User user);
+    @Delete public boolean deleteUser(User user);
 }
