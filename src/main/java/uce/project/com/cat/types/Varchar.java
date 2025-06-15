@@ -25,4 +25,9 @@ public class Varchar implements IDataType {
     public String sqlType() {
         return "VARCHAR(%s)";
     }
+    @Override
+    public String stringifyType()
+    {
+        return "\"%s\"";
+    }
 }

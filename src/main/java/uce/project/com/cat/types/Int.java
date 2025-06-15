@@ -25,5 +25,10 @@ public class Int implements IDataType {
     public String sqlType() {
         return "INT";
     }
+    @Override
+    public String stringifyType()
+    {
+        return "%s";
+    }
 }
 

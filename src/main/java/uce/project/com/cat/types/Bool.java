@@ -16,6 +16,11 @@ public class Bool implements IDataType {
     public boolean match(Class<?> clazz) {
         return Boolean.class.equals(clazz);
     }
+    @Override
+    public String stringifyType()
+    {
+        return "%s";
+    }
 
     @Override
     public String sqlType() {

@@ -12,7 +12,7 @@ import java.sql.*;
 public class Cat {
     public static Connection connection = null;
 
-    public static void setConnection(Connection connection) {
+    static void setConnection(Connection connection) {
         Cat.connection = connection;
     }
 
@@ -21,8 +21,9 @@ public class Cat {
         return connection;
     }
 
-    public static <T extends AppDataBase> T buildDataBase(Class<T> appDatabase, boolean dropPrevTables)
+    public static <T extends AppDataBase> T buildDataBase(Class<T> appDatabase, Connection connection,boolean dropPrevTables)
     {
+        setConnection(connection);
         var anotation = appDatabase.getAnnotation(Database.class);
         Class<?>[] entities = anotation.entities();
         for (var entity: entities)
