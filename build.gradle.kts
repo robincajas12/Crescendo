@@ -26,7 +26,8 @@ dependencies {
     annotationProcessor ("org.projectlombok:lombok:1.18.38")
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
     implementation("org.springframework.boot:spring-boot-starter-web:3.0.5")
-
+    // https://mvnrepository.com/artifact/com.google.genai/google-genai
+    implementation("com.google.genai:google-genai:1.4.1")
 }
 
 tasks.test {
