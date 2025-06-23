@@ -17,8 +17,8 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE id = :id")
     List<User> getById(@P("id") Integer id);
 
-    @Query("SELECT username FROM users WHERE id = :id")
-    String getUsernameById(@P("id") Integer id);
+    @Query("SELECT email, name FROM users WHERE email = :email")
+    String findOneByEmail(@P("email") String email);
 
     @Query("SELECT * FROM users WHERE username LIKE :username")
     List<User> searchByUsername(@P("username") String username);
