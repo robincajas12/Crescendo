@@ -17,8 +17,11 @@ public class User {
     @PrimaryKey(autoIncrement = true)
     private Integer id;
 
-    @ColumnInfo(name = "username", params = "255")
-    private String username;
+    @ColumnInfo(name = "name", params = "255")
+    private String name;
+
+    @ColumnInfo(name = "email", params = "255")
+    private String email;
 
     @ColumnInfo(name = "password", params = "255")
     private String password;
