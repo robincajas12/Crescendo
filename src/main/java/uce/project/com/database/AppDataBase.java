@@ -1,13 +1,16 @@
 package uce.project.com.database;
 
+import uce.project.com.baraja.Song;
+import uce.project.com.baraja.SongDao;
 import uce.project.com.cat.anotations.Database;
-import uce.project.com.database.daos.ProductDao;
-import uce.project.com.database.daos.UserDao;
-import uce.project.com.database.entities.Product;
-import uce.project.com.database.entities.User;
+import uce.project.com.condor.User;
+import uce.project.com.condor.UserDao;
+import uce.project.com.mateo.PromptDao;
+import uce.project.com.mateo.PromptEntity;
 
-@Database(entities = {User.class, Product.class})
+@Database(entities = {User.class, Song.class, PromptEntity.class})
 public interface AppDataBase {
     public UserDao userDao();
-    public ProductDao productDao();
+    public SongDao songDao();
+    public PromptDao promtDao();
 }
