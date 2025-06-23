@@ -3,6 +3,8 @@ package uce.project.com.mateo.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import uce.project.com.Main;
+import uce.project.com.condor.User;
 import uce.project.com.mateo.shared.dto.CreateUserDto;
 import uce.project.com.mateo.shared.dto.UserResponseDto;
 
@@ -26,6 +28,9 @@ public class SignupUseCase {
     if(Objects.isNull(createUserDto.getName()) || createUserDto.getName().isEmpty()) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name cannot be null or empty");
     }
+
+    User userFoundByEmail = Main.db.userDao().findOneByEmail(createUserDto.getEmail());
+
 
     System.out.println(createUserDto);
 

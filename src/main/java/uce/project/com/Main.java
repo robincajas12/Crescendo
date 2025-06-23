@@ -22,16 +22,7 @@ import java.sql.SQLException;
  */
 @SpringBootApplication
 public class Main {
-    static AppDataBase db;
-    public static AppDataBase getDb()
-    {
-        if(db == null) try {
-            throw new Exception("Error please build the database");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return db;
-    }
+    public static AppDataBase db;
     static {
         ConfigReader.load("application.properties");
         try {
