@@ -1,16 +1,21 @@
 package uce.project.com.mateo.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import uce.project.com.mateo.service.SignupUseCase;
 import uce.project.com.mateo.shared.dto.CreateUserDto;
+import uce.project.com.mateo.shared.dto.UserResponseDto;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-  @GetMapping("/hello")
-  public CreateUserDto hello(@RequestBody CreateUserDto createUserDto) {
-    return createUserDto;
+  private final SignupUseCase _signupUseCase;
+
+  public AuthController(SignupUseCase signupUseCase) {
+    this._signupUseCase = signupUseCase;
+  }
+
+  @PostMapping("/signup")
+  public UserResponseDto hello(@RequestBody CreateUserDto createUserDto) {
+    return this._signupUseCase.createUser( createUserDto );
   }
 }
