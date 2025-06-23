@@ -1,3 +1,3 @@
 server.port = 3000
-db.connection_url = jdbc:mysql://localhost:3340/dbName?user=root&password=root
-google_ai.apikey = "AI....
+db.connection_url = jdbc:mysql://localhost:3340/dbName?user=root&password=root aqui va la url
+google_ai.apikey = AI..aqui va la api key xd
