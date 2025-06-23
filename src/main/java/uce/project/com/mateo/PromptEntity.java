@@ -16,6 +16,6 @@ public class PromptEntity {
   @PrimaryKey(autoIncrement = true)
   private Integer id;
 
-  @ColumnInfo(name = "prompt")
+  @ColumnInfo(name = "prompt", params = "255")
   private String prompt;
 }

@@ -2,6 +2,7 @@ package uce.project.com;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import uce.project.com.condor.User;
 import uce.project.com.database.AppDataBase;
 import uce.project.com.cat.Cat;
 import uce.project.com.cat.utils.JSON;
@@ -44,8 +45,7 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         new SpringApplicationBuilder(Main.class)
                 .run(args);
-
-
-        System.out.println(db.userDao().getAll().stream().map(JSON::stringifyEntity).toList());
+        db.userDao().insertUser(User.builder().username("xd").build());
+        System.out.println(db.userDao().getById(1).stream().map(JSON::stringifyEntity).toList());
     }
 }
