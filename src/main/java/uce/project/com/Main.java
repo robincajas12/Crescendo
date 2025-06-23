@@ -4,8 +4,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import uce.project.com.database.AppDataBase;
 import uce.project.com.cat.Cat;
-import uce.project.com.database.entities.Product;
-import uce.project.com.database.entities.User;
 import uce.project.com.cat.utils.JSON;
 import uce.project.com.robin.ConfigReader;
 import uce.project.com.robin.ai.GoogleAIBase;
