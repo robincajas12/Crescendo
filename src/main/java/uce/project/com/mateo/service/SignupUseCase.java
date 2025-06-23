@@ -8,6 +8,7 @@ import uce.project.com.condor.User;
 import uce.project.com.mateo.shared.dto.CreateUserDto;
 import uce.project.com.mateo.shared.dto.UserResponseDto;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -29,10 +30,10 @@ public class SignupUseCase {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name cannot be null or empty");
     }
 
-    User userFoundByEmail = Main.db.userDao().findOneByEmail(createUserDto.getEmail());
+//    User userFoundByEmail = Main.db.userDao().findOneByEmail(createUserDto.getEmail());
 
-
-    System.out.println(createUserDto);
+    List<User> userFoundByEmail = Main.db.userDao().getById(1);
+    System.out.println(userFoundByEmail);
 
     return null;
   }
