@@ -10,7 +10,7 @@ import uce.project.com.mateo.shared.dto.CreateUserDto;
 @RequestMapping("/auth")
 public class AuthController {
   @GetMapping("/hello")
-  public String hello(@RequestBody CreateUserDto createUserDto) {
-    return createUserDto.toString();
+  public CreateUserDto hello(@RequestBody CreateUserDto createUserDto) {
+    return createUserDto;
   }
 }
