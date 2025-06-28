@@ -16,7 +16,6 @@ public class AuthController {
   public AuthController(SignupUseCase signupUseCase, SigninUseCase signinUseCase ) {
     this._signupUseCase = signupUseCase;
     this._signinUseCase = signinUseCase;
-
   }
 
   @PostMapping("/signup")

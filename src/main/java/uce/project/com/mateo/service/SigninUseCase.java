@@ -45,4 +45,15 @@ public class SigninUseCase {
         .name(userFound.getName())
         .build();
   }
+
+  public UserResponseDto socialSignin(String email) {
+
+    if(email == null || email.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email cannot be null or empty");
+    }
+
+
+
+    return null;
+  }
 }
