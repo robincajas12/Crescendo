@@ -107,48 +107,53 @@ public class DaoHandler implements InvocationHandler {
         return st.execute();
     }
     private Object insertOne(Object proxy, Method method, Object[] args) throws Throwable {
-        if(args.length != 1) throw new RuntimeException(method.getName()+ " must receive just one parameter");
-        Connection connection = Cat.getConnection();
-        StringBuilder builder = new StringBuilder();
-        StringBuilder paramsBuilder = new StringBuilder();
-        var item = args[0];
-        if(item == null) throw new RuntimeException("The parameter of " + method.getName() + "doesn't have to be null");
-        if(!item.getClass().isAnnotationPresent(Entity.class)) throw new RuntimeException(" the parameter of " + method.getName() + " needs to be an entity");
-        var tableName = item.getClass().getAnnotation(Entity.class).value();
-        var declaredFields = item.getClass().getDeclaredFields();
-        builder.append(String.format("INSERT INTO %s (", tableName));
-        paramsBuilder.append("VALUES(");
+        try {
+            if(args.length != 1) throw new RuntimeException(method.getName()+ " must receive just one parameter");
+            Connection connection = Cat.getConnection();
+            StringBuilder builder = new StringBuilder();
+            StringBuilder paramsBuilder = new StringBuilder();
+            var item = args[0];
+            if(item == null) throw new RuntimeException("The parameter of " + method.getName() + "doesn't have to be null");
+            if(!item.getClass().isAnnotationPresent(Entity.class)) throw new RuntimeException(" the parameter of " + method.getName() + " needs to be an entity");
+            var tableName = item.getClass().getAnnotation(Entity.class).value();
+            var declaredFields = item.getClass().getDeclaredFields();
+            builder.append(String.format("INSERT INTO %s (", tableName));
+            paramsBuilder.append("VALUES(");
 
-        ArrayList<Object> values = new ArrayList<>();
-        for(var declaredField : declaredFields)
-        {
-            declaredField.setAccessible(true);
-            var value = declaredField.get(item);
-            if(declaredField.isAnnotationPresent(PrimaryKey.class))
+            ArrayList<Object> values = new ArrayList<>();
+            for(var declaredField : declaredFields)
             {
-                var pkAnotation = declaredField.getAnnotation(PrimaryKey.class);
-                if(pkAnotation.autoIncrement()) continue;
-                else if(value == null) throw new Exception(declaredField.getName() + "doesn't have to be null because is a primary key");
+                declaredField.setAccessible(true);
+                var value = declaredField.get(item);
+                if(declaredField.isAnnotationPresent(PrimaryKey.class))
+                {
+                    var pkAnotation = declaredField.getAnnotation(PrimaryKey.class);
+                    if(pkAnotation.autoIncrement()) continue;
+                    else if(value == null) throw new Exception(declaredField.getName() + "doesn't have to be null because is a primary key");
+                }
+                if(declaredField.isAnnotationPresent(ColumnInfo.class))
+                {
+                    var columName = declaredField.getAnnotation(ColumnInfo.class).name();
+                    builder.append(String.format("%s,", columName));
+                    paramsBuilder.append("?,");
+                    values.add(value);
+                }
             }
-            if(declaredField.isAnnotationPresent(ColumnInfo.class))
+            builder = new StringBuilder(builder.substring(0, builder.length() - 1));
+            paramsBuilder = new StringBuilder(paramsBuilder.substring(0, paramsBuilder.length()-1));
+            builder.append(") ");
+            paramsBuilder.append(");");
+            String sql = builder.append(paramsBuilder).toString();
+            var st = connection.prepareStatement(sql);
+            for (int i = 0; i < values.size(); i++)
             {
-                var columName = declaredField.getAnnotation(ColumnInfo.class).name();
-                builder.append(String.format("%s,", columName));
-                paramsBuilder.append("?,");
-                values.add(value);
+                st.setObject(i+1, values.get(i));
             }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        builder = new StringBuilder(builder.substring(0, builder.length() - 1));
-        paramsBuilder = new StringBuilder(paramsBuilder.substring(0, paramsBuilder.length()-1));
-        builder.append(") ");
-        paramsBuilder.append(");");
-        String sql = builder.append(paramsBuilder).toString();
-        var st = connection.prepareStatement(sql);
-        for (int i = 0; i < values.size(); i++)
-        {
-            st.setObject(i+1, values.get(i));
-        }
-        return st.execute();
+        return false;
     }
 
     private Object getMany(Object proxy, Method method, Object[] args) throws Throwable
