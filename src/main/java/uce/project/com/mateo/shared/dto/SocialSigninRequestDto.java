@@ -5,4 +5,5 @@ import lombok.Getter;
 @Getter
 public class SocialSigninRequestDto {
   private String email;
+  private String name;
 }
