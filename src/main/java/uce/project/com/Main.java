@@ -36,7 +36,7 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         new SpringApplicationBuilder(Main.class)
                 .run(args);
-        db.userDao().insertUser(User.builder().username("xd").build());
+        db.userDao().insertUser(User.builder().email("xd").build());
         System.out.println(db.userDao().getById(1).stream().map(JSON::stringifyEntity).toList());
     }
 }
