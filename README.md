@@ -1,19 +1,34 @@
-Condor
-Crear un RestController 
-la ruta @RequestMapping("/api/prompt")
-obtener todos los promts
-guardar un prompt
-Eliminar un prompt por id
-Aplicar patrones de diseño aaaaaaaaaaaaaa
+===========================
+ Condor
+===========================
+
+Tareas:
+- Crear un RestController
+- Usar la ruta base: @RequestMapping("/api/prompt")
+
+Endpoints:
+- Obtener todos los prompts
+- Guardar un prompt
+- Eliminar un prompt por ID
+- Aplicar patrones de diseño: aaaaaaaaaaaaaaaa
+
+---------------------------
 
 Baraja
-Crear un RestController 
-la ruta @RequestMapping("/api/song")
-obtener todos los songs
-guardar un song
-Eliminar un song por id
+===========================
 
-Aplicar patrones de diseño aaaaaaaaaaaaaa
+Tareas:
+- Crear un RestController
+- Usar la ruta base: @RequestMapping("/api/song")
+
+Endpoints:
+- Obtener todos los songs
+- Guardar un song
+- Eliminar un song por ID
+
+
+- Aplicar patrones de diseño: aaaaaaaaaaaaaaaa
+
 
 
 
