@@ -47,13 +47,12 @@ public class SignupUseCase {
 
     boolean wasSuccessful = Main.db.userDao().insertUser(user);
 
-    // ! check if the user was created successfully
     if(!wasSuccessful) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to create user");
     }
 
-    User userCreated = Main.db.userDao().findOneByEmail(createUserDto.getEmail()).get(0);
-
+    var userCreated = Main.db.userDao().findOneByEmail(createUserDto.getEmail()).get(0);
+    
     return UserResponseDto.builder().id(userCreated.getId()).email(userCreated.getEmail()).name(userCreated.getName()).build();
   }
 }

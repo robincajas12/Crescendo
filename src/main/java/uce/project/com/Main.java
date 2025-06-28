@@ -26,7 +26,7 @@ public class Main {
     static {
         ConfigReader.load("application.properties");
         try {
-            db = Cat.buildDataBase(AppDataBase.class, DriverManager.getConnection(ConfigReader.get("db.connection_url")),true);
+            db = Cat.buildDataBase(AppDataBase.class, DriverManager.getConnection(ConfigReader.get("db.connection_url")),false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -36,7 +36,5 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         new SpringApplicationBuilder(Main.class)
                 .run(args);
-        Main.db.userDao().insertUser(User.builder().email("juaaan").build());
-        System.out.println(Main.db.userDao().getAll());
     }
 }
