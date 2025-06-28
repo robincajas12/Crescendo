@@ -15,7 +15,7 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
-  public UserResponseDto hello(@RequestBody CreateUserDto createUserDto) {
+  public UserResponseDto signup(@RequestBody CreateUserDto createUserDto) {
     return this._signupUseCase.createUser( createUserDto );
   }
 }
