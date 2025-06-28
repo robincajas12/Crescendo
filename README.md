@@ -70,6 +70,7 @@ public class ExampleController {
 - @RequestMapping: define una ruta base para el controlador.
 - @GetMapping, @PostMapping: indican qué tipo de petición HTTP maneja.
 - @RequestBody: permite recibir un objeto JSON como entrada.
+![image](https://github.com/user-attachments/assets/85ac37df-9464-44f6-96c4-5604ff260e7f)
 
 📦 Clase para el cuerpo del POST
 
