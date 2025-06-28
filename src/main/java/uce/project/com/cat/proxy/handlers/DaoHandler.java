@@ -149,6 +149,7 @@ public class DaoHandler implements InvocationHandler {
             {
                 st.setObject(i+1, values.get(i));
             }
+            st.execute();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
