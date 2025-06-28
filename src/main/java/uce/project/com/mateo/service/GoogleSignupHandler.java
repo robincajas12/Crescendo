@@ -1,6 +1,7 @@
 package uce.project.com.mateo.service;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import uce.project.com.Main;
 import uce.project.com.condor.User;
@@ -8,6 +9,7 @@ import uce.project.com.mateo.shared.dto.SocialSigninRequestDto;
 import uce.project.com.mateo.shared.dto.UserResponseDto;
 import uce.project.com.mateo.shared.services.IHandler;
 
+@Service
 public class GoogleSignupHandler implements IHandler<SocialSigninRequestDto> {
   private IHandler<SocialSigninRequestDto> nextHandler;
   @Override
