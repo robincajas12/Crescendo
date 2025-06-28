@@ -5,6 +5,7 @@ import uce.project.com.mateo.service.SigninUseCase;
 import uce.project.com.mateo.service.SignupUseCase;
 import uce.project.com.mateo.shared.dto.CreateUserDto;
 import uce.project.com.mateo.shared.dto.SigninRequestDto;
+import uce.project.com.mateo.shared.dto.SocialSigninRequestDto;
 import uce.project.com.mateo.shared.dto.UserResponseDto;
 
 @RestController
@@ -26,5 +27,10 @@ public class AuthController {
   @PostMapping("/signin")
   public UserResponseDto signin(@RequestBody SigninRequestDto signinRequestDto ) {
     return this._signinUseCase.signin(signinRequestDto.getEmail(), signinRequestDto.getPassword());
+  }
+
+  @PostMapping("/social/signin")
+  public UserResponseDto socialSignin(@RequestBody SocialSigninRequestDto socialSigninRequestDto) {
+    return this._signinUseCase.socialSignin(socialSigninRequestDto);
   }
 }
