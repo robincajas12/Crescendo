@@ -52,8 +52,18 @@ public class SigninUseCase {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email cannot be null or empty");
     }
 
+    List<User> userFoundByEmail = Main.db.userDao().findOneByEmail(email);
 
+    if(userFoundByEmail.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Email not found");
+    }
 
-    return null;
+    User userFound = userFoundByEmail.get(0);
+
+    return UserResponseDto.builder()
+            .id(userFound.getId())
+            .email(userFound.getEmail())
+            .name(userFound.getName())
+            .build();
   }
 }
