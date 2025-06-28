@@ -37,13 +37,22 @@ public class SignupUseCase {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
     }
 
-    int passwordHashed = Encrypter.hash(createUserDto.getPassword());
+    String passwordHashed = Encrypter.hash(createUserDto.getPassword());
 
     User user = User.builder()
         .email(createUserDto.getEmail())
         .password(passwordHashed)
         .name(createUserDto.getName())
         .build();
-    return null;
+
+    boolean wasSuccessful = Main.db.userDao().insertUser(user);
+
+    if(!wasSuccessful) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to create user");
+    }
+
+    User userCreated = Main.db.userDao().findOneByEmail(createUserDto.getEmail()).get(0);
+
+    return UserResponseDto.builder().id(userCreated.getId()).email(userCreated.getEmail()).name(userCreated.getName()).build();
   }
 }
