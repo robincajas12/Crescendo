@@ -47,6 +47,7 @@ public class SignupUseCase {
 
     boolean wasSuccessful = Main.db.userDao().insertUser(user);
 
+    // ! check if the user was created successfully
     if(!wasSuccessful) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to create user");
     }
