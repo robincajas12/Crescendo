@@ -6,7 +6,7 @@ import lombok.ToString;
 @Builder
 @ToString
 public class UserResponseDto {
-  public String id;
+  public Integer id;
   public String email;
   public String name;
 }
