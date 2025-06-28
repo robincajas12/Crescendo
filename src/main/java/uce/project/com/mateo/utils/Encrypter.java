@@ -18,7 +18,7 @@ public class Encrypter {
     return result.toString();
   }
 
-  public static boolean verificar(String input, String hashEsperado) {
-    return hash(input).equals(hashEsperado);
+  public static boolean verify(String input, String inputExpected) {
+    return hash(input).equals(inputExpected);
   }
 }
