@@ -6,19 +6,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Encrypter {
-  public static int hash(String input) {
-    int hash = 0;
+  public static String hash(String input) {
+    StringBuilder result = new StringBuilder();
 
     for (int i = 0; i < input.length(); i++) {
       char c = input.charAt(i);
 
-      hash += (c * (i + 1));
+      result.append(String.format("%02x", (int)c + i));
     }
 
-    return hash;
+    return result.toString();
   }
 
-  public static boolean verificar(String input, int hashEsperado) {
-    return hash(input) == hashEsperado;
+  public static boolean verificar(String input, String hashEsperado) {
+    return hash(input).equals(hashEsperado);
   }
 }

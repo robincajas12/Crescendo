@@ -7,6 +7,7 @@ import uce.project.com.Main;
 import uce.project.com.condor.User;
 import uce.project.com.mateo.shared.dto.CreateUserDto;
 import uce.project.com.mateo.shared.dto.UserResponseDto;
+import uce.project.com.mateo.utils.Encrypter;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,11 +31,19 @@ public class SignupUseCase {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name cannot be null or empty");
     }
 
-//    User userFoundByEmail = Main.db.userDao().findOneByEmail(createUserDto.getEmail());
+    List<User> userFoundByEmail = Main.db.userDao().findOneByEmail(createUserDto.getEmail());
 
-    List<User> userFoundByEmail = Main.db.userDao().getById(1);
-    System.out.println(userFoundByEmail);
+    if(!userFoundByEmail.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
+    }
 
+    int passwordHashed = Encrypter.hash(createUserDto.getPassword());
+
+    User user = User.builder()
+        .email(createUserDto.getEmail())
+        .password(passwordHashed)
+        .name(createUserDto.getName())
+        .build();
     return null;
   }
 }
