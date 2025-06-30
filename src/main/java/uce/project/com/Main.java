@@ -26,7 +26,7 @@ public class Main {
     static {
         ConfigReader.load("application.properties");
         try {
-            db = Cat.buildDataBase(AppDataBase.class, DriverManager.getConnection(ConfigReader.get("db.connection_url")),false);
+            db = Cat.buildDataBase(AppDataBase.class, DriverManager.getConnection(ConfigReader.get("db.connection_url")),true);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

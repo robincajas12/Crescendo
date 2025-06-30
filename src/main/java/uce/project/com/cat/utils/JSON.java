@@ -4,6 +4,9 @@ import uce.project.com.cat.anotations.ColumnInfo;
 import uce.project.com.cat.anotations.Entity;
 import uce.project.com.cat.types.SqlTypes;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class JSON {
     public static <T> String stringifyEntity(T obj) {
         if(!obj.getClass().isAnnotationPresent(Entity.class)) throw new RuntimeException(obj.getClass().getName() + " can not be parsed because is not an entity");
@@ -27,5 +30,8 @@ public class JSON {
             e.printStackTrace();
         }
         throw new RuntimeException("Error  in JSON class xddd xd");
+    }
+    public static <T> String stringify(List<T> item) {
+        return item.stream().map(JSON::stringifyEntity).toList().toString();
     }
 }

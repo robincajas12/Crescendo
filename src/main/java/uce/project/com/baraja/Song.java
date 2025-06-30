@@ -24,6 +24,6 @@ public class Song {
     @ColumnInfo(name = "genero", params = "100")
     private String genero;
 
-    @ColumnInfo(name = "notasMusicales", params = "1000")
+    @ColumnInfo(name = "notasMusicales", params = "5000")
     private String notasMusicales;
 }
