@@ -1,11 +1,11 @@
-package uce.project.com.robin.controllers;
+package uce.project.com.baraja;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class BodyCreateSong {
+public class PostSongBody {
     private String prompt;
     private Integer userId;
 }

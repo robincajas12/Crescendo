@@ -18,8 +18,8 @@ public class Song {
     @ColumnInfo(name = "nombre", params = "255")
     private String nombre;
 
-    @ColumnInfo(name = "promtId", params = "255")
-    private String promtId;
+    @ColumnInfo(name = "userId")
+    private Integer userId;
 
     @ColumnInfo(name = "genero", params = "100")
     private String genero;
