@@ -27,9 +27,8 @@ public class CreateSongController {
         return res;
     }
     @GetMapping("/api/song")
-    public List<Song> createSong()
+    public List<Song> getSongs()
     {
-        System.out.println(JSON.stringify(Main.db.songDao().getAll()));
         return Main.db.songDao().getAll();
     }
 }
