@@ -4,14 +4,14 @@ import uce.project.com.Main;
 import uce.project.com.baraja.SongDao;
 import java.util.List;
 
-// Singleton
+
 public class SongManager {
 
     private static SongManager instancia;
     private final SongDao songDao;
 
     private SongManager() {
-        this.songDao = Main.db.songDao(); // <- accede a tu instancia principal
+        this.songDao = Main.db.songDao(); 
     }
 
     public static synchronized SongManager getInstancia() {
