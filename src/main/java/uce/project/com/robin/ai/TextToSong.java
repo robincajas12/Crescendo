@@ -22,7 +22,7 @@ public class TextToSong implements IAsk<String> {
         map.put("notes", Schema
                 .builder()
                 .type(Type.Known.ARRAY)
-                        .items(Schema.builder().type(Type.Known.STRING).description("notes like Chord or single notes to play").build())
+                        .items(Schema.builder().type(Type.Known.STRING).description("notes like Chord or single notes to play in octaves format").build())
                 .build());
         map.put("duration", Schema.builder().type(Type.Known.NUMBER).description("Time the note should play in seconds").build());
         GenerateContentConfig config = GenerateContentConfig

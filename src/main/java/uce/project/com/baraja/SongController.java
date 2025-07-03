@@ -24,7 +24,7 @@ public class SongController {
     @PostMapping
     public ResponseEntity<String> createSong(@RequestBody PostSongBody body) {
         GoogleAIBase ai = new GoogleAIBase(ConfigReader.get("google_ai.apikey"));
-        ai.setModel("gemini-2.5-flash-lite-preview-06-17");
+        ai.setModel("gemini-2.5-flash");
         ai.setMaxTokens(100000);
         String res = new TextToSong(ai).ask(body.getPrompt());
         Song song = Song.builder().userId(body.getUserId()).nombre((body.getPrompt().length() > 30 ? body.getPrompt().substring(0, 30) + "..." : body.getPrompt())).notasMusicales(res).build();
