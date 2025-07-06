@@ -13,7 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Manejador de invocación para interfaces DAO (Data Access Object).
+ * Intercepta las llamadas a métodos anotados con {@link Query}, {@link Insert}, {@link Update} o {@link Delete}
+ * y ejecuta las operaciones de base de datos correspondientes.
+ */
 public class DaoHandler implements InvocationHandler {
+    /**
+     * Procesa las invocaciones de métodos en las interfaces DAO.
+     * Redirige la llamada al método apropiado según la anotación presente en el método invocado.
+     * @param proxy La instancia de proxy en la que se invocó el método.
+     * @param method El objeto Method correspondiente al método invocado.
+     * @param args Un array de objetos que contiene los valores de los argumentos pasados al método invocado.
+     * @return El resultado de la operación de base de datos.
+     * @throws Throwable Si ocurre un error durante la invocación o si la implementación del DAO es incorrecta.
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if(method.isAnnotationPresent(Query.class)) return getMany(proxy, method, args);
@@ -23,6 +37,16 @@ public class DaoHandler implements InvocationHandler {
         throw new RuntimeException(method.getName() +  " error make sure your dao implementation is right");
     }
 
+    /**
+     * Realiza una operación de actualización en la base de datos.
+     * Espera un único argumento que debe ser una entidad anotada con {@link Entity}.
+     * Construye una sentencia SQL UPDATE basada en los campos de la entidad y su clave primaria.
+     * @param proxy La instancia de proxy.
+     * @param method El método invocado (anotado con {@link Update}).
+     * @param args Los argumentos del método, esperando una única entidad.
+     * @return `true` si la actualización fue exitosa, `false` en caso contrario.
+     * @throws Exception Si el número de argumentos es incorrecto, el argumento es nulo, o la entidad no es válida.
+     */
     private Object updateOne(Object proxy, Method method, Object[] args) throws Exception {
         if(args.length != 1) throw new RuntimeException(method.getName()+ " must receive just one parameter");
         var item = args[0];
@@ -75,6 +99,18 @@ public class DaoHandler implements InvocationHandler {
         return st.execute();
     }
 
+    /**
+     * Realiza una operación de eliminación en la base de datos.
+     * Espera un único argumento que debe ser una entidad anotada con {@link Entity}.
+     * Construye una sentencia SQL DELETE basada en la clave primaria de la entidad.
+     * @param proxy La instancia de proxy.
+     * @param method El método invocado (anotado con {@link Delete}).
+     * @param args Los argumentos del método, esperando una única entidad.
+     * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
+     * @throws IllegalAccessException Si no se puede acceder a un campo de la entidad.
+     * @throws SQLException Si ocurre un error de SQL.
+     * @throws RuntimeException Si el número de argumentos es incorrecto, el argumento es nulo, la entidad no es válida, o la clave primaria es nula.
+     */
     private Object deleteOne(Object proxy, Method method, Object[] args) throws IllegalAccessException, SQLException {
         if(args.length != 1) throw new RuntimeException(method.getName()+ " must receive just one parameter");
         Connection connection = Cat.getConnection();
@@ -106,6 +142,17 @@ public class DaoHandler implements InvocationHandler {
         st.setObject(1,primaryKey.get());
         return st.execute();
     }
+
+    /**
+     * Realiza una operación de inserción en la base de datos.
+     * Espera un único argumento que debe ser una entidad anotada con {@link Entity}.
+     * Construye una sentencia SQL INSERT basada en los campos de la entidad.
+     * @param proxy La instancia de proxy.
+     * @param method El método invocado (anotado con {@link Insert}).
+     * @param args Los argumentos del método, esperando una única entidad.
+     * @return `true` si la inserción fue exitosa, `false` en caso contrario.
+     * @throws Throwable Si ocurre un error durante la inserción (ej. número de argumentos incorrecto, argumento nulo, entidad no válida, o clave primaria nula y no autoincremental).
+     */
     private Object insertOne(Object proxy, Method method, Object[] args) throws Throwable {
         try {
             if(args.length != 1) throw new RuntimeException(method.getName()+ " must receive just one parameter");
@@ -157,6 +204,15 @@ public class DaoHandler implements InvocationHandler {
         return false;
     }
 
+    /**
+     * Ejecuta una consulta SQL y mapea los resultados a una lista de objetos de entidad.
+     * Espera que el método invocado esté anotado con {@link Query}.
+     * @param proxy La instancia de proxy.
+     * @param method El método invocado (anotado con {@link Query}).
+     * @param args Los argumentos del método, que se utilizan para reemplazar los parámetros en la consulta SQL.
+     * @return Una lista de objetos de entidad que representan los resultados de la consulta.
+     * @throws Throwable Si ocurre un error durante la ejecución de la consulta o el mapeo de resultados.
+     */
     private Object getMany(Object proxy, Method method, Object[] args) throws Throwable
     {
         String query = method.getAnnotation(Query.class).value();

@@ -6,22 +6,40 @@ import uce.project.com.mateo.PromptEntity;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de prompts.
+ * Proporciona endpoints para obtener, guardar y eliminar prompts.
+ */
 @RestController
 @RequestMapping("/api/prompt")
 public class PromptController {
 
+    /**
+     * Obtiene todos los prompts disponibles.
+     * @return Una respuesta HTTP que contiene una lista de objetos PromptEntity.
+     */
     @GetMapping
     public ResponseEntity<List<PromptEntity>> getAllPrompts() {
         List<PromptEntity> prompts = PromptManager.getInstancia().getAllPromts();
         return ResponseEntity.ok(prompts);
     }
 
+    /**
+     * Guarda un nuevo prompt en la base de datos.
+     * @param request Objeto PromptRequest que contiene el texto del prompt a guardar.
+     * @return Una respuesta HTTP que contiene el PromptEntity guardado y un estado 201 (Created).
+     */
     @PostMapping
     public ResponseEntity<PromptEntity> savePrompt(@RequestBody PromptRequest request) {
         PromptEntity savedPrompt = PromptManager.getInstancia().guardarPromt(request.getPrompt());
         return ResponseEntity.status(201).body(savedPrompt);
     }
 
+    /**
+     * Elimina un prompt por su ID.
+     * @param id El ID del prompt a eliminar.
+     * @return Una respuesta HTTP que indica el éxito o fracaso de la operación.
+     */
     @DeleteMapping
     public ResponseEntity<String> deletePrompt(@RequestParam Integer id) {
         boolean success = PromptManager.getInstancia().deletePrompt(id);
