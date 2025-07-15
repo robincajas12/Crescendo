@@ -2,15 +2,10 @@ package uce.project.com;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import uce.project.com.condor.User;
 import uce.project.com.database.AppDataBase;
 import uce.project.com.cat.Cat;
-import uce.project.com.cat.utils.JSON;
-import uce.project.com.robin.ConfigReader;
-import uce.project.com.robin.ai.GoogleAIBase;
-import uce.project.com.robin.ai.TextToSong;
+import uce.project.com.utils.ConfigReader;
 
-import java.awt.*;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 

@@ -1,0 +1,353 @@
+@startuml
+class uce.project.com.cat.proxy.handlers.DaoHandler {
++ Object invoke(Object,Method,Object[])
+- Object updateOne(Object,Method,Object[])
+- Object deleteOne(Object,Method,Object[])
+- Object insertOne(Object,Method,Object[])
+- Object getMany(Object,Method,Object[])
+}
+
+interface uce.project.com.baraja.IAsk {
+~ T ask(String)
+~ T ask(String,String)
+}
+
+interface uce.project.com.database.AppDataBase {
++ UserDao userDao()
++ SongDao songDao()
++ PromptDao promtDao()
+}
+
+class uce.project.com.robin.controllers.BodyCreateSong {
+- String prompt
+- Integer userId
+}
+
+class uce.project.com.mateo.shared.dto.CreateUserDto {
+- String name
+- String email
+- String password
+}
+
+interface uce.project.com.mateo.PromptDao {
+~ PromptEntity getPromtById(Integer)
+~ PromptEntity filterByWord(String)
+~ List<PromptEntity> getAll()
+~ boolean insertPromt(PromptEntity)
+~ boolean updatePromt(PromptEntity)
+~ boolean deletePromt(PromptEntity)
+}
+
+class uce.project.com.baraja.Song {
+- Integer id
+- String nombre
+- Integer userId
+- String genero
+- String notasMusicales
+}
+
+class uce.project.com.mateo.utils.Encrypter {
++ {static} String hash(String)
++ {static} boolean verify(String,String)
+}
+
+interface uce.project.com.cat.anotations.TableActions {
+~ {static} String getSql(Class<?>)
++ {static} boolean doesTableExist(Connection,String)
+~ {static} boolean dropTable(Connection,String)
+}
+
+class uce.project.com.robin.ConfigReader {
+- {static} Properties prop
++ {static} void load(String)
++ {static} String get(String)
+}
+
+
+class uce.project.com.cat.types.Varchar {
+~ {static} Varchar varchar
++ {static} Varchar get()
++ boolean match(Class<?>)
++ String sqlType()
++ String stringifyType()
+}
+
+
+class uce.project.com.condor.PromptRequest {
+- String prompt
+}
+
+class uce.project.com.robin.ai.TextToSong {
+~ GoogleAIBase aiBase
++ String ask(String)
++ String ask(String,String)
+}
+
+
+class uce.project.com.mateo.shared.dto.SocialSigninRequestDto {
+- String email
+- String name
+}
+
+class uce.project.com.mateo.service.SignupUseCase {
++ UserResponseDto createUser(CreateUserDto)
+}
+
+class uce.project.com.mateo.shared.dto.SigninRequestDto {
+- String email
+- String password
+}
+
+class uce.project.com.robin.ai.GoogleAIBase {
+- Client client
+- String model
+- float temperature
+- int maxTokens
++ void setModel(String)
++ String getModel()
++ void setTemperature(float)
++ float getTemperature()
++ void setMaxTokens(int)
++ int getMaxTokens()
++ List<String> getModels()
++ Client getClient()
+}
+
+
+class uce.project.com.baraja.SongController {
++ ResponseEntity<List<Song>> getAllSongs()
++ ResponseEntity<String> createSong(PostSongBody)
++ ResponseEntity<String> deleteSong(Integer)
+}
+
+class uce.project.com.cat.types.Int {
+~ {static} Int dInt
++ {static} Int get()
++ boolean match(Class<?>)
++ String sqlType()
++ String stringifyType()
+}
+
+
+class uce.project.com.baraja.SongRequest {
+- Integer userId
+- Integer songId
+}
+
+class uce.project.com.mateo.shared.dto.UserResponseDto {
++ Integer id
++ String email
++ String name
+}
+
+class uce.project.com.Main {
++ {static} AppDataBase db
++ {static} void main(String[])
+}
+
+
+class uce.project.com.mateo.service.GoogleSignupHandler {
+- IHandler<SocialSigninRequestDto> nextHandler
++ UserResponseDto handleRequest(SocialSigninRequestDto)
++ void setNextHandler(IHandler<SocialSigninRequestDto>)
+}
+
+
+interface uce.project.com.condor.inter.IAI {
+~ void setModel(String)
+~ String getModel()
+~ void setTemperature(float)
+~ float getTemperature()
+~ void setMaxTokens(int)
+~ int getMaxTokens()
+~ List<String> getModels()
+}
+
+class uce.project.com.cat.types.SqlTypes {
++ {static} IDataType get(Class<?>)
+}
+
+class uce.project.com.condor.PromptManager {
+- {static} PromptManager instancia
+- PromptDao promtDao
++ {static} PromptManager getInstancia()
++ List<PromptEntity> getAllPromts()
++ PromptEntity guardarPromt(String)
++ boolean deletePrompt(Integer)
+}
+
+
+interface uce.project.com.condor.UserDao {
+~ List<User> getAll()
+~ List<User> getById(Integer)
+~ List<User> findOneByEmail(String)
+~ List<User> searchByUsername(String)
+~ boolean insertUser(User)
+~ boolean updateUser(User)
+~ boolean deleteUser(User)
+}
+
+class uce.project.com.baraja.SongManager {
+- {static} SongManager instancia
+- SongDao songDao
++ {static} SongManager getInstancia()
++ List<Song> getAllSongs()
++ boolean eliminarSong(Integer)
+}
+
+
+class uce.project.com.condor.User {
+- Integer id
+- String name
+- String email
+- String password
+}
+
+class uce.project.com.mateo.service.GoogleSigninHandler {
+- IHandler<SocialSigninRequestDto> nextHandler
++ UserResponseDto handleRequest(SocialSigninRequestDto)
++ void setNextHandler(IHandler<SocialSigninRequestDto>)
+}
+
+
+class uce.project.com.cat.proxy.handlers.AppDatabaseHandler {
++ Object invoke(Object,Method,Object[])
+}
+
+class uce.project.com.condor.PromptController {
++ ResponseEntity<List<PromptEntity>> getAllPrompts()
++ ResponseEntity<PromptEntity> savePrompt(PromptRequest)
++ ResponseEntity<String> deletePrompt(Integer)
+}
+
+class uce.project.com.mateo.PromptEntity {
+- Integer id
+- String prompt
+}
+
+interface uce.project.com.cat.types.inter.IDataType {
+~ boolean match(Class<?>)
+~ String sqlType()
+~ String stringifyType()
+}
+
+class uce.project.com.cat.utils.JSON {
++ {static} String stringifyEntity(T)
++ {static} String stringify(List<T>)
+}
+
+class uce.project.com.config.CorsConfig {
++ void addCorsMappings(CorsRegistry)
+}
+
+class uce.project.com.baraja.PostSongBody {
+- String prompt
+- Integer userId
+}
+
+interface uce.project.com.baraja.SongDao {
+~ List<Song> getAll()
+~ List<Song> getSongByID(Integer)
+~ List<Song> getSongsByGender(String)
+~ List<Song> filterByName(String)
+~ boolean insertSong(Song)
+~ boolean updateSong(Song)
+~ boolean deleteSong(Song)
+}
+
+class uce.project.com.cat.Cat {
++ {static} Connection connection
+~ {static} void setConnection(Connection)
++ {static} Connection getConnection()
++ {static} T buildDataBase(Class<T>,Connection,boolean)
+}
+
+
+class uce.project.com.mateo.service.SigninUseCase {
+- GoogleSigninHandler _googleSigninHandler
+- GoogleSignupHandler _googleSignupHandler
++ UserResponseDto signin(String,String)
++ UserResponseDto socialSignin(SocialSigninRequestDto)
+}
+
+
+class uce.project.com.cat.SqlColumnInfo {
+- IDataType type
+- String columnName
+- boolean isPrimaryKey
+- boolean autoIncrement
+- String params
+~ IDataType type
+~ String columnName
+~ boolean isPrimaryKey
+~ boolean autoIncrement
+~ String params
++ {static} Builder builder()
++ Builder type(IDataType)
++ Builder params(String)
++ Builder columnName(String)
++ Builder isPrimaryKey(boolean)
++ SqlColumnInfo build()
++ Builder autoIncrement(boolean)
++ IDataType type()
++ boolean isPrimaryKey()
++ String columnName()
++ String params()
++ boolean autoIncrement()
+}
+
+
+class uce.project.com.cat.SqlColumnInfo$Builder {
+~ IDataType type
+~ String columnName
+~ boolean isPrimaryKey
+~ boolean autoIncrement
+~ String params
++ Builder type(IDataType)
++ Builder params(String)
++ Builder columnName(String)
++ Builder isPrimaryKey(boolean)
++ SqlColumnInfo build()
++ Builder autoIncrement(boolean)
+}
+
+
+class uce.project.com.mateo.controller.AuthController {
+- SignupUseCase _signupUseCase
+- SigninUseCase _signinUseCase
++ UserResponseDto signup(CreateUserDto)
++ UserResponseDto signin(SigninRequestDto)
++ UserResponseDto socialSignin(SocialSigninRequestDto)
+}
+
+
+class uce.project.com.robin.controllers.CreateSongController {
+}
+class uce.project.com.cat.types.Bool {
+- {static} Bool dBool
++ {static} Bool get()
++ boolean match(Class<?>)
++ String stringifyType()
++ String sqlType()
+}
+
+
+interface uce.project.com.mateo.shared.services.IHandler {
+~ UserResponseDto handleRequest(T)
+~ void setNextHandler(IHandler<T>)
+}
+
+
+
+uce.project.com.cat.proxy.handlers.InvocationHandler <|.. uce.project.com.cat.proxy.handlers.DaoHandler
+uce.project.com.cat.types.inter.IDataType <|.. uce.project.com.cat.types.Varchar
+uce.project.com.baraja.IAsk <|.. uce.project.com.robin.ai.TextToSong
+uce.project.com.condor.inter.IAI <|.. uce.project.com.robin.ai.GoogleAIBase
+uce.project.com.cat.types.inter.IDataType <|.. uce.project.com.cat.types.Int
+uce.project.com.mateo.shared.services.IHandler <|.. uce.project.com.mateo.service.GoogleSignupHandler
+uce.project.com.mateo.shared.services.IHandler <|.. uce.project.com.mateo.service.GoogleSigninHandler
+java.lang.reflect.InvocationHandler <|.. uce.project.com.cat.proxy.handlers.AppDatabaseHandler
+org.springframework.web.servlet.config.annotation.WebMvcConfigurer <|.. uce.project.com.config.CorsConfig
+uce.project.com.cat.SqlColumnInfo +.. uce.project.com.cat.SqlColumnInfo$Builder
+uce.project.com.cat.types.inter.IDataType <|.. uce.project.com.cat.types.Bool
+@enduml
