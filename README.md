@@ -2,7 +2,7 @@
 
 Este documento proporciona un análisis técnico exhaustivo de los paquetes y clases del proyecto, con un enfoque especial en los patrones de diseño, la arquitectura general y las guías de extensibilidad.
 
-(Documentacion tecnica en ingles aquí )[https://deepwiki.com/robincajas12/grupal_patrones]
+[Documentacion tecnica en ingles aquí](https://deepwiki.com/robincajas12/grupal_patrones)
 
 ------------------------------------------------------------------------
 
