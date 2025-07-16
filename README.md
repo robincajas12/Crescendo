@@ -499,12 +499,20 @@ Este módulo permite gestionar canciones, incluyendo la generación de canciones
 ```
 **Response (Éxito - 200 OK):**
 ```json
-{
-  "id": 2,
-  "content": "Verso 1: Los algoritmos sueñan...\nCoro: IA, IA, qué será...",
-  "userId": 1,
-  "createdAt": "2023-11-22T10:45:00Z"
-}
+[  
+  {  
+    "notes": ["C4", "E4", "G4"],  
+    "duration": 2.5  
+  },  
+  {  
+    "notes": ["F4"],  
+    "duration": 1.0  
+  },  
+  {  
+    "notes": ["A4", "C5"],  
+    "duration": 3.0  
+  }  
+]
 ```
 **Posibles Errores:**
 
