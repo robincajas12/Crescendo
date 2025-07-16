@@ -471,13 +471,21 @@ Este módulo permite gestionar canciones, incluyendo la generación de canciones
 
 **Response (Éxito - 200 OK):**
 ```json
-[
-  {
-    "id": 1,
-    "content": "Verso 1: Navegando por el cosmos...",
-    "userId": 1,
-    "createdAt": "2023-11-20T14:30:00Z"
-  }
+[  
+  {  
+    "id": 1,  
+    "nombre": "Canción generada con IA sobre...",  
+    "userId": 123,  
+    "genero": "Pop",  
+    "notasMusicales": "[{\"notes\":[\"C4\",\"E4\",\"G4\"],\"duration\":2.5},{\"notes\":[\"F4\",\"A4\",\"C5\"],\"duration\":1.8}]"  
+  },  
+  {  
+    "id": 2,  
+    "nombre": "Melodía inspirada en jazz...",  
+    "userId": 456,  
+    "genero": "Jazz",  
+    "notasMusicales": "[{\"notes\":[\"D4\",\"F#4\",\"A4\"],\"duration\":3.0},{\"notes\":[\"G4\",\"B4\",\"D5\"],\"duration\":2.2}]"  
+  }  
 ]
 ```
 #### 2. Generar una Nueva Canción con IA
